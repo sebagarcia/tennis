@@ -1,16 +1,24 @@
-package com.sebagarcia.tennis;
+package com.sebagarcia.tennis.Activities;
 
 
 
 import android.app.ProgressDialog;
+import android.content.Context;
+import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.ActionBar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuItem;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
+
+import com.sebagarcia.tennis.JSONParser;
+import com.sebagarcia.tennis.R;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -46,11 +54,13 @@ public class MainActivity extends AppCompatActivity{
     JSONArray products = null;
 
     ListView lista;
+    private SharedPreferences pref;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        pref = getSharedPreferences("Preferences", Context.MODE_PRIVATE);
 
         // Hashmap para el ListView
         empresaList = new ArrayList<HashMap<String, String>>();
@@ -161,5 +171,44 @@ public class MainActivity extends AppCompatActivity{
                 }
             });
         }
+
+
+
+
     }
+
+    /**
+     * Código del login
+     */
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu){
+        getMenuInflater().inflate(R.menu.menu, menu);
+        return super.onCreateOptionsMenu(menu);
+    }
+
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+
+            case R.id.menu_forget_logout:
+                removeSharedPreferences();
+                logout();
+                return true;
+
+            default:
+                return super.onOptionsItemSelected(item);
+        }
+
+    }
+
+    private void logout(){
+        Intent intent = new Intent(this, LoginActivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        startActivity(intent);
+    }
+
+    private void removeSharedPreferences(){
+        pref.edit().clear().apply();
+    }
+
 }
