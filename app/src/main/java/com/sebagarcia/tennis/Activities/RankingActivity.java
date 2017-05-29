@@ -115,7 +115,15 @@ public class RankingActivity extends AppCompatActivity {
     @Override
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
+            case R.id.mi_perfil:
+                Intent intent = new Intent(this, MiPerfilActivity.class);
+                startActivity(intent);
+                return true;
 
+            case R.id.desafio:
+                intent = new Intent(this, ChallengeActivity.class);
+                startActivity(intent);
+                return true;
 
             case R.id.menu_forget_logout:
                 removeSharedPreferences();

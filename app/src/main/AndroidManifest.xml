@@ -19,7 +19,9 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".Activities.RankingActivity"/>
+        <activity android:name=".Activities.RankingActivity" />
+        <activity android:name=".Activities.MiPerfilActivity" />
+        <activity android:name=".Activities.ChallengeActivity"></activity>
     </application>
 
 </manifest>
