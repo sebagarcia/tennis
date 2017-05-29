@@ -14,4 +14,7 @@ public class Util {
     public static String getUserPassPref(SharedPreferences preferences){
         return preferences.getString("Password","");
     }
+    public static int getUserIdPref(SharedPreferences preferences){
+        return preferences.getInt("Id",0);
+    }
 }

@@ -119,7 +119,7 @@ public class LoginActivity extends AppCompatActivity {
         if (switchRemember.isChecked()){
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("Email",email);
-            editor.putInt("id",id);
+            editor.putInt("Id",id);
             editor.putString("Name",name);
             Toast.makeText(this,"Bienvenido "+name.toString(), Toast.LENGTH_LONG).show();
             editor.apply();     //asincrona
