@@ -13,8 +13,16 @@ import android.widget.EditText;
 import android.widget.Switch;
 import android.widget.Toast;
 
+import com.sebagarcia.tennis.API.API;
+import com.sebagarcia.tennis.Clases.Player;
 import com.sebagarcia.tennis.R;
+import com.sebagarcia.tennis.API.APIServices.SessionPlayerService;
 import com.sebagarcia.tennis.Util.Util;
+
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import retrofit2.Retrofit;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -38,23 +46,44 @@ public class LoginActivity extends AppCompatActivity {
         String email = editTextEmail.getText().toString();
         String password = editTextPassword.getText().toString();
 
-        if (login(email,password)){
-            goToMain();
-            saveOnPreferences(email,password);
+        if(login(email,password)){
+            Retrofit retrofit = API.getApi();
+            SessionPlayerService service = retrofit.create(SessionPlayerService.class);
+            Call<Player> playerCall = service.newSessionPlayer(email,password);
+            playerCall.enqueue(new Callback<Player>() {
+                @Override
+                public void onResponse(Call<Player> call, Response<Player> response) {
+                    Player player = response.body();
+                    if (player != null){
+                        goToMain();
+                        saveOnPreferences(player.getEmail(),player.getId(),player.getName());
+                    }else{
+                        Toast.makeText(LoginActivity.this,"Email y/o Contraseña inválidos",
+                                Toast.LENGTH_LONG).show();
+                    }
+
+                }
+
+                @Override
+                public void onFailure(Call<Player> call, Throwable t) {
+                    System.out.print(true);
+                }
+            });
+
         }
     }
 
 
     private boolean login(String email, String password){
-        boolean valid = false;
+        boolean valid=false;
         if (!isValidEmail(email)){
             Toast.makeText(this,"El email no es válido, por favor intentar de nuevo",Toast.LENGTH_LONG).show();
         }else if (!isValidPassword(password)){
             Toast.makeText(this,"La contraseña no es válida, por favor intentar de nuevo",Toast.LENGTH_LONG).show();
         }else{
-            valid = true ;
+           valid = true;
         }
-        return valid;
+       return valid;
     }
 
     private void bindUI(){
@@ -85,12 +114,14 @@ public class LoginActivity extends AppCompatActivity {
         return character;
     }
 
-    private void saveOnPreferences(String email, String password){
+    private void saveOnPreferences(String email, int id, String name){
 
         if (switchRemember.isChecked()){
             SharedPreferences.Editor editor = pref.edit();
             editor.putString("Email",email);
-            editor.putString("Password",password);
+            editor.putInt("id",id);
+            editor.putString("Name",name);
+            Toast.makeText(this,"Bienvenido "+name.toString(), Toast.LENGTH_LONG).show();
             editor.apply();     //asincrona
             // editor.commit(); //síncrona
         }
@@ -98,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void goToMain(){
         //vamos del login activity al main activity
-        Intent intent = new Intent(this, MainActivity.class);
+        Intent intent = new Intent(this, RankingActivity.class);
 
         //Si queremos que no vaya atrás porque es un login tenemos que hacer
         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);

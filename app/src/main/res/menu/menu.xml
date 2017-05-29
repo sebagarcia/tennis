@@ -3,8 +3,22 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
+        android:id="@+id/desafio"
+        android:title="Desafiar"
+        app:showAsAction="never"
+        />
+
+    <item
+        android:id="@+id/mi_perfil"
+        android:title="Mi perfil"
+        app:showAsAction="never"
+        />
+
+
+    <item
         android:id="@+id/menu_forget_logout"
         android:title="Cerrar Sesión"
         app:showAsAction="never"
         />
+
 </menu>
