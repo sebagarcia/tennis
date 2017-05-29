@@ -11,7 +11,7 @@ public class Player {
     private String name;
     private String email;
     private String phone;
-    private int Score;
+    private int score;
 
     //Constructor
     public Player(int id, String name, String email, String phone, int score) {
@@ -19,7 +19,7 @@ public class Player {
         this.name = name;
         this.email = email;
         this.phone = phone;
-        Score = score;
+        this.score = score;
     }
 
 
@@ -58,10 +58,10 @@ public class Player {
     }
 
     public int getScore() {
-        return Score;
+        return score;
     }
 
     public void setScore(int score) {
-        Score = score;
+        this.score = score;
     }
 }

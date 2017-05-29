@@ -129,7 +129,6 @@ public class RankingActivity extends AppCompatActivity {
                 removeSharedPreferences();
                 logout();
                 return true;
-
             default:
                 return super.onOptionsItemSelected(item);
         }
