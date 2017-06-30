@@ -73,7 +73,7 @@ public class RankingActivity extends AppCompatActivity {
                     HashMap map = new HashMap();
 
                     // adding each child node to HashMap key => value
-                    String puntaje = "Puntaje: "+player.getScore();
+                    String puntaje = "Ranking: "+String.valueOf(player.getScore());
                     map.put(TAG_ID, player.getId());
                     map.put(TAG_NOMBRE, player.getName());
                     map.put(TAG_PUNTAJE, puntaje);
