@@ -1,21 +1,19 @@
 package com.sebagarcia.tennis.Activities;
-
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.ArrayAdapter;
 import android.widget.ListAdapter;
 import android.widget.ListView;
 import android.widget.SimpleAdapter;
 import android.widget.Toast;
 
 import com.sebagarcia.tennis.API.API;
-import com.sebagarcia.tennis.Clases.Player;
 import com.sebagarcia.tennis.API.APIServices.PlayerService;
+import com.sebagarcia.tennis.Clases.Player;
 import com.sebagarcia.tennis.R;
 
 import java.util.ArrayList;
@@ -26,8 +24,6 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
-
-import static android.R.attr.id;
 
 public class RankingActivity extends AppCompatActivity {
 
@@ -122,6 +118,11 @@ public class RankingActivity extends AppCompatActivity {
 
             case R.id.desafio:
                 intent = new Intent(this, ChallengeActivity.class);
+                startActivity(intent);
+                return true;
+
+            case R.id.ranking:
+                intent = new Intent(this, RankingActivity.class);
                 startActivity(intent);
                 return true;
 

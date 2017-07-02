@@ -13,7 +13,11 @@
         android:title="Mi perfil"
         app:showAsAction="never"
         />
-
+    <item
+        android:id="@+id/ranking"
+        android:title="Ranking"
+        app:showAsAction="never"
+        />
 
     <item
         android:id="@+id/menu_forget_logout"
