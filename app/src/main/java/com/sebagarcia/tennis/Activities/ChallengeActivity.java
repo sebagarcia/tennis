@@ -39,6 +39,7 @@ public class ChallengeActivity extends AppCompatActivity {
     private TextView list_players;
     private Button btn_gane;
     private Button btn_perdi;
+    private Button btn_desafiar;
 
     private ListView listview;
     private List<Player> players;
@@ -179,11 +180,13 @@ public class ChallengeActivity extends AppCompatActivity {
             return convertView;
         }
     }
+
     public class ViewHolder {
 
         Button button1;
         TextView title;
         Button button2;
+        Button button3;
     }
     private void removeSharedPreferences(){
         pref.edit().clear().apply();
